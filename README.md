@@ -1,1 +1,0 @@
-# yuriy-grynevych.github.io

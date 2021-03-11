@@ -116,6 +116,29 @@
         <p>Hi, <?=$_SESSION['user']?></p>
         <a href="logout.php">logout</a>
     <?php endif; ?>
+	    <?php
+
+require_once('db.php');
+
+session_start();
+
+if (!empty($_POST['login']) && !empty($_POST['password']))
+{
+    if ($_POST['login'] == USERNAME)
+    {
+        if (password_verify($_POST['password'], PASSWORD))
+        {
+            $_SESSION['user'] = htmlspecialchars($_POST['login']);  
+        }
+    }
+}
+
+header("Location: http://localhost:8003/index.php");
+<?php
+session_start();
+unset($_SESSION['user']);
+session_destroy();
+header("Location: http://localhost:8003/index.php");
 	  </div>
 	    
 	   

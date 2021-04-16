@@ -1,39 +1,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<? 
+session_start(); 
+?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
+ 
 </head>
  
 <body>
-<h1>Który wladca był ostatnim królem z dynastii Piastów?
-</h1>
+<h1>W którym roku Polska przyjęła chrzest?
+</h1><br />
  
-<form>
+<form method='post' action='quiz3.php'>
  
-<INPUT name='odp3' TYPE='Radio' VALUE='a'>
-Kazimierz Wielki<br>
-<INPUT name='odp3' TYPE='Radio' VALUE='b'>
-Bolesław Śmiały<br>
-<INPUT name='odp3' TYPE='Radio' VALUE='c'>
-Kazimierz Odnowiciel<br />
+<INPUT name='odp2' TYPE='Radio' VALUE='a'>
+966<br>
+<INPUT name='odp2' TYPE='Radio' VALUE='b'>
+1025<br>
+<INPUT name='odp2' TYPE='Radio' VALUE='c'>
+1235<br />
 <input name='submit' type='submit' value='Wyslij' />
  
-</form>
+</form> 
  
-<?php 
+<?php
  
-$odp3 = $_POST['odp3'];
+$odp2 = $_POST['odp2'];
  
-if($odp3 == "a") {
- 
+if ($odp == "a") {
 	$_SESSION['poprawne']++;
 }
-echo $_SESSION['poprawne'];
- 
 ?>
  
 </body>
 </html>
-	    
-	

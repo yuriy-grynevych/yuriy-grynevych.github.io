@@ -42,7 +42,58 @@ if ($odp == "a") {
 session_start(); 
 ?>
  
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml">$pytania = file("test.txt");
+ 
+$komunikat5 = "Genialnie";
+$komunikat4 = "Bardzo dobrze";
+$komunikat3 = "Średnio";
+$komunikat2 = "Słabo";
+$komunikat1 = "Lipa";
+ 
+$f = $_POST["f"];
+$wyniki = $_POST["wyniki"];
+srand((double)microtime() * 1000000);
+ 
+if ($wyniki>0) {
+  $ile = count($pytania); $dobre = 0;
+  for ($o=0; $o<$ile ;$o++)
+	  if ($f[$o] == 1)
+		  $dobre++;
+  $srednia = sprintf("%2d", ($dobre / $ile) * 100);
+  echo "Poprawne odpowiedzi: $dobre z $ile. ";
+  echo "Zaliczone $srednia procent testu.<p>";
+  if ($srednia <= 25)                  echo $komunikat1;
+  if ($srednia > 25 && $srednia <= 50) echo $komunikat2;
+  if ($srednia > 50 && $srednia <= 75) echo $komunikat3;
+  if ($srednia > 75 && $srednia <= 99) echo $komunikat4;
+  if ($srednia == 100)                 echo $komunikat5;
+  echo "";
+} else {
+  echo "<form action=\"quiz2.php\" method=\"post\">";
+  echo "<input type=\"hidden\" name=\"wyniki\" value=\"1\" />";
+  $ile = count($pytania);
+  for($i=0;$i<$ile;$i++) {
+    $nr = array_rand($pytania);
+    $tmp = $pytania[$nr];
+    $pytania[$nr] = $pytania[count($pytania) - 1];
+    $pytania[count($pytania) - 1] = $tmp;
+    $pyt = explode("|", array_pop($pytania));
+    echo "<p><strong>";
+		echo $i + 1;
+		echo ". $pyt[0] </strong><br>";
+    for ($b=1;$b<=count($pyt)-1;$b++)
+      $odp[] = "<input type=\"radio\" name=\"f[$i]\" value=\"$b\" />$pyt[$b]<br />";
+    $ileodp = count($odp);
+    for($io=0;$io<$ileodp;$io++) {
+      $nr = array_rand($odp);
+      $tmp = $odp[$nr];
+      $odp[$nr] = $odp[count($odp) - 1];
+      $odp[count($odp) - 1] = $tmp;
+      echo array_pop($odp);
+    }
+  }
+  echo "<input type=submit value=\" Odpowiedz! \" /></form>";
+}
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>QUIZ 1</title>

@@ -1,4 +1,4 @@
-<!TYPE html>
+<!--<!TYPE html>
 
 <html lang="pl">
 
@@ -174,5 +174,47 @@
 
   </body>
 
+</html>-->
+<html>
+<script>
+var tquiz = new Array();
+tquiz[0] = new Array('1+1=','1','2','3','2');
+tquiz[1] = new Array('2+2=','4','5','6','1');
+tquiz[2] = new Array('3+3=','4','5','6','3');
+tquiz[3] = new Array('4+4=','7','8','9','2');
+
+window.onload = function(){
+    var a = '';
+    for(i=0;i<tquiz.length;i++){
+        a += '<p><span style="font-weight:bold;">'+(i+1)+') </span>' +tquiz[i][0]+ '<div style="padding-left:20px;">';
+        a += '<label for="quiz_' +i+ '_1"><input id="quiz_' +i+ '_1" name="quiz_g_' +i+ '" type="radio">' +tquiz[i][1]+ '</label><br />';
+        a += '<label for="quiz_' +i+ '_2"><input id="quiz_' +i+ '_2" name="quiz_g_' +i+ '" type="radio">' +tquiz[i][2]+ '</label><br />';
+        a += '<label for="quiz_' +i+ '_3"><input id="quiz_' +i+ '_3" name="quiz_g_' +i+ '" type="radio">' +tquiz[i][3]+ '</label>';
+        a += '</div></p>';
+    }
+    a += '<input type="button" onclick="fQuiz()" value="sprawdź">';
+    document.getElementById('quiz').innerHTML = a;
+}
+
+function fQuiz(){
+   var b = true;
+    for(i=0;i<tquiz.length;i++) if(document.getElementById('quiz_' +i+ '_1').checked == false && document.getElementById('quiz_' +i+ '_2').checked == false && document.getElementById('quiz_' +i+ '_3').checked == false) b = false;
+    var c = 0;
+    if(b){
+      for(i=0;i<tquiz.length;i++){
+         var d = tquiz[i][4];
+         if(document.getElementById('quiz_' +i+ '_' +d).checked) c++;   
+      }
+      document.getElementById('quiz').innerHTML = '<p>Odpowiedzi poprawnych: ' +c+ '<br />Wszystkich pytań: ' +tquiz.length+ '<br /> Poprawność odpowiedzi: ' +(c/tquiz.length*100)+ '%</p>';
+   }
+   else {
+      alert('Odpowiedz na wszystkie pytania!!!');
+   }
+}
+
+</script>
+<body>
+    <div id="quiz"></div>
+</body>
 </html>
 

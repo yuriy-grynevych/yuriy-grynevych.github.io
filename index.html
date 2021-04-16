@@ -1,224 +1,39 @@
-<!--<!TYPE html>
-
-<html lang="pl">
-
-  <head>
-
-    <meta charset="utf-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="Yuriy, Yuriy grynevych, Yuriy grynevych sp. z o.o." />	
-	  
-	  
-
-    <title>Yuriy sp. z o.o.</title>
-    <style>
-
-      
-	      
-	      
-	      
-	 * {
-		 box-sizing: border-box;
-		 }
-	      
-	.pistol__makarov {
-	      position: absolute;
-	      Top:0;
-	      right: 60%;
-	      Weight: 20vw;
-	      Height; 20vh;
-	      Animation: slideDown 20s linear infinite ;
-	      }
-	    
-	 
-      @keyframes rotate {
-	      To {transform: rotate(360deg)}		
-	      From {transform: rotate(0deg)}
-		      }
-	      
-	      
-	      
-	      
-	@keyframes slideDown {
-	      From {transform:translateY(-100vh)}
-	      to {transform:translateY(100vh)}
-	      }
-	 
-	
-	
-      .pistol__earth{
-	      Position: absolute;
-	      top:0;
-	      right: 5%;
-	      Height: 75vh;
-	      Opacity: .5;
-	      Animation: rotate 25s linear infinite;
-	      }
-	    
-	    
-	    
-	    
-	    
-	    
-	.div{
-	      Border-radius: 25px;
-	      Background: linear-gradient(to right top, rgba(0,0,0,0.75), rgba(0,0,0,0.25));
-	      width:75%;
-	      height:75%;
-	      position: relative;
-	      Backdrop-filter: blur(8px);
-	      background: rgba(0,0,0,0.50)
-		      
-		      }
-		      
-	body {
-	 Width: 100vw;
-	 Height: 100vh;     
-	 Background: #15d9c0;
-	 
-		align-items:center;
-		justify-content:center;
-		overflow: hidden;
-		display:flex;
-		
-		Background: linear-gradient(to right top, #000000, #15d9c0);
-		
-	      }
-	   
-	    .link{
-		    Position: relative;
-		    Width: 30vw;
-		    Height: 10vh;
-		    Background: linear-gradient(to right top, #ffffff, #00ffa3);
-		    Margin: 50px 0px 0px 200px;
-		    Padding: 10px;
-		    Border-radius: 25px;
-		    transition: .5s;
-		    }
-	    .a {
-		    Text-align: center;
-				
-		    font-family: "Times New Roman"; 
-		    Text-decoration: none;
-		    Color: #000000;
-		    }
-	    .link:hover {
-		    transform: scale(1.1);
-		     
-		    Background: linear-gradient( to right top, #ffffff, #11b378);
-		    }
-	    .a:hover { 
-		    Color: #751222;
-		    text-decoration: underline;
-		    }
-	    .h {
-		   Text-align: center;
-		   Color: #03989e;
-		   Font-family: serif;
-		   }
-			   	
-		
-	
-	  </style>
-      
-  </head>
-  <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/126/126141.png">
-
-
-  <body>
-
-    <div class="pistol">
-	  <img src="https://image.flaticon.com/icons/png/512/120/120089.png" class="pistol__makarov">
-	  <img src="https://image.flaticon.com/icons/png/512/124/124606.png" class="pistol__earth">
-	  
-	</div>
-
-		   
-    <div class="div">
-	    <!--<h1 class="h"> Pomóżcie Kamilu </h1>-->
-	    	<!--h2 class="h"> lecz na wielką przykrość nic tutaj nie znajdziesz</h2>
-	    <div class="link"><a href="https://adrian12328.github.io/" target="blank" class="a">Tutaj znajdziesz więcej ciekawych rzeczy</a></div>
-	
-	    
-	  </div>
-	    
-	   
-
-
-
-<!--<script>
-    /**
-    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-    /*
-    var disqus_config = function () {
-    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-    */
-    (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://https-yuriy-grynevych-github-io.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>-->		  
-
-		  	  
-	  
-    
-
-
-
-  </body>
-
-</html>-->
-<html>
-	
-	
-<head><title>Quiz filozofia</title><style> #quiz { text-align:center;}</style></head>
-	
-	<script>
-var tquiz = new Array();
-tquiz[0] = new Array('1+1=','1','2','3','2');
-tquiz[1] = new Array('2+2=','4','5','6','1');
-tquiz[2] = new Array('3+3=','4','5','6','3');
-tquiz[3] = new Array('4+4=','7','8','9','2');
-
-window.onload = function(){
-    var a = '';
-    for(i=0;i<tquiz.length;i++){
-        a += '<p><span style="font-weight:bold;">'+(i+1)+') </span>' +tquiz[i][0]+ '<div style="padding-left:20px;">';
-        a += '<label for="quiz_' +i+ '_1"><input id="quiz_' +i+ '_1" name="quiz_g_' +i+ '" type="radio">' +tquiz[i][1]+ '</label><br />';
-        a += '<label for="quiz_' +i+ '_2"><input id="quiz_' +i+ '_2" name="quiz_g_' +i+ '" type="radio">' +tquiz[i][2]+ '</label><br />';
-        a += '<label for="quiz_' +i+ '_3"><input id="quiz_' +i+ '_3" name="quiz_g_' +i+ '" type="radio">' +tquiz[i][3]+ '</label>';
-        a += '</div></p>';
-    }
-    a += '<input type="button" onclick="fQuiz()" value="sprawdź">';
-    document.getElementById('quiz').innerHTML = a;
-}
-
-function fQuiz(){
-   var b = true;
-    for(i=0;i<tquiz.length;i++) if(document.getElementById('quiz_' +i+ '_1').checked == false && document.getElementById('quiz_' +i+ '_2').checked == false && document.getElementById('quiz_' +i+ '_3').checked == false) b = false;
-    var c = 0;
-    if(b){
-      for(i=0;i<tquiz.length;i++){
-         var d = tquiz[i][4];
-         if(document.getElementById('quiz_' +i+ '_' +d).checked) c++;   
-      }
-      document.getElementById('quiz').innerHTML = '<p>Odpowiedzi poprawnych: ' +c+ '<br />Wszystkich pytań: ' +tquiz.length+ '<br /> Poprawność odpowiedzi: ' +(c/tquiz.length*100)+ '%</p>';
-   }
-   else {
-      alert('Odpowiedz na wszystkie pytania!!!');
-   }
-}
-
-</script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+ 
 <body>
-    <div id="quiz"></div>
+<h1>Który wladca był ostatnim królem z dynastii Piastów?
+</h1>
+ 
+<form>
+ 
+<INPUT name='odp3' TYPE='Radio' VALUE='a'>
+Kazimierz Wielki<br>
+<INPUT name='odp3' TYPE='Radio' VALUE='b'>
+Bolesław Śmiały<br>
+<INPUT name='odp3' TYPE='Radio' VALUE='c'>
+Kazimierz Odnowiciel<br />
+<input name='submit' type='submit' value='Wyslij' />
+ 
+</form>
+ 
+<?php 
+ 
+$odp3 = $_POST['odp3'];
+ 
+if($odp3 == "a") {
+ 
+	$_SESSION['poprawne']++;
+}
+echo $_SESSION['poprawne'];
+ 
+?>
+ 
 </body>
 </html>
-
+	    
+	

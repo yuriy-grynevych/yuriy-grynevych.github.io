@@ -1,87 +1,68 @@
-<!DOCTYPE html> 
+import asyncio
 
-<html lang="pl"> 
+from pywebio import start_server
+from pywebio.input import *
+from pywebio.output import *
+from pywebio.session import defer_call, info as session_info, run_async, run_js
 
-  <head> 
+chat_msgs = []
+online_users = set()
 
-    <meta charset="utf-8"> 
+MAX_MESSAGES_COUNT = 100
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>Krystyna Mowczan</title>
-<style>
-.zdjęcia {
-Widht: 100px;
-Height: 100px;
-}
-Body {
-Background-color: #FFFF00;
-}
-h1{
-Color: #FF0000;
-Text-align: center;
-	text-decoration:none;
-	
-}
-.div { background-color:#C0C0C0; 
-	font-size: 22px; 
-	text-decoration:underline;}
-	.p { 
-		font-family: monospace; 
-		text-size: 12px;}
-	
-	
-	
+async def main():
+    global chat_msgs
+    
+    put_markdown("## 🧊 Добро пожаловать в онлайн чат!\nИсходный код данного чата укладывается в 100 строк кода!")
 
+    msg_box = output()
+    put_scrollable(msg_box, height=300, keep_bottom=True)
 
-</style>
-	
+    nickname = await input("Войти в чат", required=True, placeholder="Ваше имя", validate=lambda n: "Такой ник уже используется!" if n in online_users or n == '📢' else None)
+    online_users.add(nickname)
 
-   
+    chat_msgs.append(('📢', f'`{nickname}` присоединился к чату!'))
+    msg_box.append(put_markdown(f'📢 `{nickname}` присоединился к чату'))
 
-  </head> 
+    refresh_task = run_async(refresh_msg(nickname, msg_box))
 
- 
+    while True:
+        data = await input_group("💭 Новое сообщение", [
+            input(placeholder="Текст сообщения ...", name="msg"),
+            actions(name="cmd", buttons=["Отправить", {'label': "Выйти из чата", 'type': 'cancel'}])
+        ], validate = lambda m: ('msg', "Введите текст сообщения!") if m["cmd"] == "Отправить" and not m['msg'] else None)
 
-  <body> 
-<h1><a href="https://pl.wikipedia.org/wiki/Najwi%C4%99ksze_jeziora_Polski">3 największe jeziora w Polsce</a></h1>
-<h3>Śniardwy<h3/>
-<img src="https://i.nocimg.pl/d8/608/16-5-miejsc-w-okolicy-jeziora.jpg" class="zdjęcia"/>
+        if data is None:
+            break
 
+        msg_box.append(put_markdown(f"`{nickname}`: {data['msg']}"))
+        chat_msgs.append((nickname, data['msg']))
 
+    refresh_task.close()
 
+    online_users.remove(nickname)
+    toast("Вы вышли из чата!")
+    msg_box.append(put_markdown(f'📢 Пользователь `{nickname}` покинул чат!'))
+    chat_msgs.append(('📢', f'Пользователь `{nickname}` покинул чат!'))
 
-<h3>Mamry</h3>
-<p class="p">Mamry (niem. Mauersee) – jezioro w północno-wschodniej Polsce, woj. warmińsko-mazurskim, w Krainie Wielkich Jezior Mazurskich. <br>
-Mamry to jezioro polodowcowe morenowe[2] i drugie pod względem powierzchni jezioro w Polsce.
-Dno jeziora jest zróżnicowane z licznymi zagłębieniami i wypłyceniami, przy czym część północna jest wyraźnie głębsza. </p>
-</p>
-<br>
-<br>
-<ol type="a">
-<li>ma trzy wydzielone części.</li>
-<li>wynosi od 9851,0 ha[5] do 10282,4 ha[6].</li>
-<li>Mamry to jezioro polodowcowe</li>
-</ol>
+    put_buttons(['Перезайти'], onclick=lambda btn:run_js('window.location.reload()'))
 
+async def refresh_msg(nickname, msg_box):
+    global chat_msgs
+    last_idx = len(chat_msgs)
 
+    while True:
+        await asyncio.sleep(1)
+        
+        for m in chat_msgs[last_idx:]:
+            if m[0] != nickname: # if not a message from current user
+                msg_box.append(put_markdown(f"`{m[0]}`: {m[1]}"))
+        
+        # remove expired
+        if len(chat_msgs) > MAX_MESSAGES_COUNT:
+            chat_msgs = chat_msgs[len(chat_msgs) // 2:]
+        
+        last_idx = len(chat_msgs)
 
-
-<h3>Łebsko</h3>
-<div class="div"> 
-<p>Łebsko (kaszub. Łebskò, niem. Lebasee) – jezioro przybrzeżne w województwie pomorskim (na terenie gmin Wicko oraz Smołdzino) <br>
-na Wybrzeżu Słowińskim, trzecie pod względem powierzchni jezioro w Polsce. Jezioro jest miejscem występowania grzybieni białych <br>
-(Nymphaea alba L.) oraz grążeli żółtych (Nuphar lutea)[10]. W pelagialu licznie występują rośliny z rodzaju wywłóczników oraz rdestnic, </p></div>
-<a href="https://meteor-turystyka.pl/miejsce/jezioro-lebsko-w-lebie"><img src="https://meteor-turystyka.pl/images/places/0/95.jpg" class="zdjęcia" ></a>
-<ul type="square">
-<li>Krystyna Mowczan</li>
- <li>ZSE 1</li>
- <li>1b</li>
-</ul>
-
-
-
-  </body> 
-
-</html>	
-																																																																										
-	
+if __name__ == "__main__":
+    start_server(main, debug=True, port=8080, cdn=False)

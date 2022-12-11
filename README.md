@@ -4,8 +4,12 @@
      <head>
 	 <title>MAPA EUROPY</title>
      </head>
-     <body background="https://assets.ipuzzle.pl/puzzle/064/912/original.jpg">
-	 <a href="https://pl.wikipedia.org/wiki/Polska">
-	 <div style="opacity: 0; font-size: xx-large; margin-top:435px; margin-left:480px;">kwadrat</div>
-	 </body>
+     <body>
+<div id="openai-chat"></div>
+<script src="https://api.openai.com/v1/code/sk-2IHyQonMdUmVTMnniUtBT3BlbkFJb1qOpvKutesTaxSx1N2r/generate?prompt=Hello&model=text-davinci-002"></script>
+<script>
+  var el = document.getElementById('openai-chat');
+  el.innerHTML = JSON.parse(this.responseText).data.response;
+</script>
+</body>
 </html>
